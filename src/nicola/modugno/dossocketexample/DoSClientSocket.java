@@ -1,5 +1,6 @@
 package nicola.modugno.dossocketexample;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,7 +53,7 @@ public class DoSClientSocket {
 					pw.print("Host: " + host.getHostName() + "\r\n\r\n");
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					String line;
-					while((line=br.readLine())!=null){
+					while((line=BoundedLineReader.readLine(br, 5_000_000))!=null){
 			            System.out.println(line);
 			        }
 					pw.flush();
